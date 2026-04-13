@@ -185,7 +185,7 @@ async function toggleLike() {
 
 async function toggleSave() {
     if (!sessionState.logged_in) { alert("Bạn cần đăng nhập!"); return; }
-    const res = await fetch(`${BASE_URL}user/profile/bookmark`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({news_id: nId}) });
+    const res = await fetch(`${BASE_URL}news/save`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'toggle_save', news_id: nId}) });
     const data = await res.json();
     if (data.status === 'success') { fetchNewsDetail(); }
 }

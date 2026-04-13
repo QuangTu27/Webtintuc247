@@ -90,6 +90,28 @@ class NewsDetailModel
         return 'liked';
     }
 
+    public function toggleSave(int $userId, int $newsId): string
+    {
+        $existing = $this->db->fetch(
+            "SELECT id FROM tbl_bookmarks WHERE user_id = ? AND news_id = ?",
+            [$userId, $newsId]
+        );
+
+        if ($existing !== false) {
+            $this->db->query(
+                "DELETE FROM tbl_bookmarks WHERE user_id = ? AND news_id = ?",
+                [$userId, $newsId]
+            );
+            return 'unsaved';
+        }
+
+        $this->db->query(
+            "INSERT INTO tbl_bookmarks (user_id, news_id, ngay_luu) VALUES (?, ?, NOW())",
+            [$userId, $newsId]
+        );
+        return 'saved';
+    }
+
     public function postComment(int $newsId, int $userId, string $tenNguoiBinh, string $noidung, ?int $parentId, int $status): bool
     {
         $this->db->query(

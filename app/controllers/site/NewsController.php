@@ -109,6 +109,32 @@ class NewsController extends Controller
         exit;
     }
 
+    public function save()
+    {
+        header('Content-Type: application/json');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            echo json_encode(['status' => 'error', 'message' => 'Invalid method']);
+            exit;
+        }
+
+        $data = json_decode(file_get_contents('php://input'), true);
+        $newsId = isset($data['news_id']) ? (int)$data['news_id'] : 0;
+        
+        if (!isset($_SESSION['client_logged_in']) || $_SESSION['client_logged_in'] !== true || $newsId <= 0) {
+            echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
+            exit;
+        }
+
+        $newsModel = $this->model('NewsDetailModel');
+        $action = $newsModel->toggleSave($_SESSION['client_id'], $newsId);
+        
+        echo json_encode([
+            'status' => 'success',
+            'action' => $action
+        ]);
+        exit;
+    }
+
     public function comment($action = null)
     {
         header('Content-Type: application/json');
