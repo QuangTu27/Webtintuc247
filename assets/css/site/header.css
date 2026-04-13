@@ -1,0 +1,386 @@
+#header-placeholder {
+  height: 100px;
+  display: none;
+}
+
+header {
+  width: 100%;
+  background: #ffffff;
+  z-index: 1000;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+header.is-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header.hide-top {
+  transform: translateY(-50px); /* Ẩn Topbar khi cuộn xuống */
+}
+
+.top-bar {
+  height: 50px;
+  background: #0a9e54; /* Màu chủ đạo Xanh */
+  border-bottom: 1px solid #088a49;
+}
+
+.top-bar-inner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 20px;
+}
+
+.logo-top {
+  font-size: 24px;
+  font-weight: 800;
+  color: #065311;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.logo-top span {
+  color: #ffffff;
+  margin-right: 30px;
+}
+
+/* Thời tiết */
+.weather-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #fff;
+}
+
+.date-location {
+  text-align: right;
+  line-height: 1.2;
+}
+
+.date-location .city {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.date-location .date {
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.weather-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.weather-detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.weather-detail img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.weather-detail .temp {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#weather-icon {
+  background: transparent !important;
+  border-radius: 0 !important;
+  width: 28px;
+  height: 28px;
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+/* User Action */
+.user-action a {
+  color: #fff !important;
+  text-decoration: none;
+  font-size: 14px;
+}
+.user-action .sep {
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 5px;
+}
+
+/* Danh mục */
+.nav-menu-wrapper {
+  height: 50px;
+  background: #fff;
+  border-bottom: 2px solid #0a9e54;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Nút Home */
+.nav-btn-home {
+  width: 40px;
+  height: 40px;
+  background: #0a9e54;
+  color: #fff !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.nav-btn-home:hover {
+  background: #088a49;
+}
+
+/* Nút Xem tất cả */
+.nav-btn-all {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #555;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.nav-btn-all:hover {
+  color: #0a9e54;
+}
+
+/* Danh sách chính */
+.nav-categories ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.nav-categories > ul > li {
+  position: relative;
+  padding: 15px 0;
+}
+
+.nav-categories a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 700;
+  font-size: 15px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.nav-categories a:hover {
+  color: #0a9e54;
+}
+
+.nav-categories > ul > li {
+  position: relative;
+  padding: 0;
+}
+
+.nav-categories > ul > li > a {
+  padding: 0 10px;
+  line-height: 50px;
+}
+
+/* danh mục con */
+.nav-categories ul.sub-menu {
+  display: none; /* Ẩn mặc định */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  border-top: 3px solid #00b686;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  z-index: 9999;
+  border-radius: 0 0 4px 4px;
+}
+.nav-categories li:hover > ul.sub-menu {
+  display: block; /* Hiện ra */
+  animation: fadeInUp 0.2s ease forwards;
+}
+
+/*item con*/
+.nav-categories ul.sub-menu li {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-categories ul.sub-menu li a {
+  display: block;
+  padding: 12px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eeeeee;
+  background-color: #fff;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.nav-categories ul.sub-menu li a:hover {
+  background-color: #f9f9f9;
+  color: #00b686;
+  padding-left: 25px;
+}
+/* Xóa border dưới cùng của item cuối */
+.nav-categories ul.sub-menu li:last-child a {
+  border-bottom: none;
+}
+
+/* Hiệu ứng trượt lên */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* menu full */
+#full-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10000; /* Nằm trên tất cả mọi thứ */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+  padding-top: 60px;
+}
+
+/* Khi có class active thì hiện lên */
+#full-menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Hộp nội dung chính */
+#full-menu-overlay .container {
+  background: #f7f7f7;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 1140px;
+  position: relative;
+  top: -20px;
+  transition: top 0.3s ease;
+}
+
+#full-menu-overlay.active .container {
+  top: 0; /* Hiệu ứng trượt xuống */
+}
+
+/* Header của menu (Tiêu đề + Nút đóng) */
+.full-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.full-menu-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #0a9e54;
+  text-transform: uppercase;
+}
+
+.close-btn {
+  cursor: pointer;
+  color: #757575;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  color: #d32f2f;
+}
+
+/* Lưới danh mục (Chia 5 cột) */
+.full-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 cột đều nhau */
+  gap: 30px;
+}
+
+/* Cột danh mục */
+.menu-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Link cha */
+.menu-column .parent-link {
+  font-weight: bold;
+  font-size: 15px;
+  color: #333; /* Màu đậm cho cha */
+  margin-bottom: 10px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.menu-column .parent-link:hover {
+  color: #0a9e54;
+}
+
+/* Link con */
+.child-links a {
+  display: block;
+  font-size: 13px;
+  color: #666; /* Màu nhạt cho con */
+  margin-bottom: 6px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.child-links a:hover {
+  color: #0a9e54;
+  padding-left: 3px;
+}

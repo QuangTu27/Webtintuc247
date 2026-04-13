@@ -1,0 +1,63 @@
+/* Chia lưới 4 cột đều nhau */
+.news-grid-system {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Card bài viết */
+.card-item {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Quy định chiều cao khung ảnh cố định */
+.img-wrap {
+  height: 160px;
+  /* Chiều cao cố định, ảnh sẽ không bị to quá */
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Ảnh bên trong tự cắt (crop) để vừa khít khung */
+.img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Cắt ảnh cho vừa, không bị méo */
+  transition: transform 0.3s;
+}
+
+/* Phần nội dung chữ */
+.card-body {
+  padding: 15px;
+  flex: 1;
+  /* Đẩy nội dung chiếm hết khoảng trống còn lại */
+}
+
+.card-body h4 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  margin-top: 0;
+
+  /* Cắt chữ nếu tiêu đề quá dài (tối đa 2 dòng) */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #333;
+}

@@ -1,0 +1,71 @@
+.table-scroll {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  color: white;
+  background-color: #007bff;
+  z-index: 10;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.ads-image {
+  text-align: center;
+}
+
+.ads-image img {
+  width: 100px;
+  height: auto;
+  border-radius: 4px;
+}
+
+.admin-table th:last-child,
+.admin-table td:last-child {
+  width: 1%;
+  white-space: nowrap; /* ko xuống dòng */
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.admin-table .btn {
+  min-width: 80px;
+  padding: 6px 12px;
+  font-size: 16px;
+  height: auto;
+}
+div #status-msg {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}

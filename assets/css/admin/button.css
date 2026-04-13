@@ -1,0 +1,123 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 140px;
+  height: 42px;
+  padding: 0 16px;
+
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-add {
+  background-color: #28a745;
+  color: white;
+  margin-bottom: 20px;
+}
+.btn-add:hover {
+  background-color: #218838;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+  color: black;
+}
+.btn-edit:hover {
+  background-color: #e0a800;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: white;
+}
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+.btn-view {
+  background-color: #17a2b8;
+  color: white;
+}
+.btn-view:hover {
+  background-color: #138496;
+}
+
+.btn_back {
+  background-color: #6c757d;
+  color: white;
+}
+.btn_back:hover {
+  background-color: #5a6268;
+}
+
+.btn-OK {
+  background: #007bff;
+  color: #fff;
+}
+.btn-OK:hover {
+  background: #0069d9;
+}
+
+.btn-Cancel {
+  background-color: #dc3545;
+  color: white;
+}
+.btn-Cancel:hover {
+  background-color: #c82333;
+}
+
+.btn-group-center {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.admin-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-controls {
+  display: flex;
+  gap: 10px;
+}
+
+/* SEARCH BOX */
+.search-form {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.search-input {
+  height: 42px;
+  padding: 0 12px;
+  width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.empty-table-cell {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}

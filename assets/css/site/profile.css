@@ -1,0 +1,459 @@
+.profile-container {
+  display: flex;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 20px auto;
+  align-items: flex-start;
+}
+
+.profile-sidebar {
+  flex: 1;
+  max-width: 280px;
+}
+
+.profile-content {
+  flex: 3;
+  background: #fff;
+  padding: 30px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+}
+
+/*  2. SIDEBAR CARD  */
+.user-card {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.user-card-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.avatar-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  object-fit: cover;
+}
+
+.user-meta h4 {
+  margin: 0;
+  font-size: 15px;
+  color: #333;
+}
+.user-meta span {
+  font-size: 13px;
+  color: #888;
+}
+
+.contact {
+  font-size: 13px;
+  color: #006aff;
+  margin-bottom: 15px;
+}
+/* Menu */
+.profile-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.profile-menu a {
+  display: block;
+  padding: 12px 0;
+  font-size: 15px;
+  color: #555;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.profile-menu a:hover {
+  color: #00b686;
+  padding-left: 5px;
+}
+.profile-menu li.active a {
+  color: #333;
+  font-weight: bold;
+}
+
+.logout-item {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+}
+.logout-item a {
+  color: #777;
+}
+.logout-item a:hover {
+  color: #d9534f;
+}
+
+/* Support Box */
+.support-box {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #666;
+}
+
+/*  3. CONTENT AREA  */
+.page-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.info-row:last-child {
+  border-bottom: none;
+}
+.info-row.avatar-row {
+  align-items: flex-start;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+.info-value {
+  font-size: 15px;
+  color: #666;
+  display: block;
+}
+
+/*  4. EDIT FORMS  */
+.edit-container {
+  display: none;
+}
+.d-block {
+  display: block !important;
+} /* Class hỗ trợ hiện form khi có lỗi */
+.hidden {
+  display: none !important;
+}
+
+/* Box Styles */
+.normal-edit-box {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+}
+
+.avatar-edit-box {
+  border: 2px dashed #ddd;
+  padding: 30px;
+  text-align: center;
+  border-radius: 4px;
+  background: #fdfdfd;
+}
+
+/* Avatar Sizes */
+.avatar-sm {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 10px;
+}
+.avatar-md {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+/* Form Elements */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.form-label {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Password Toggle */
+.password-wrapper {
+  position: relative;
+}
+.password-wrapper input {
+  padding-right: 40px;
+}
+.toggle-text {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-80%);
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+}
+.toggle-text:hover {
+  color: #333;
+}
+
+/* ===== 5. BUTTONS & ACTIONS ===== */
+.btn-save {
+  background: #00b686;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-save:hover {
+  background: #019d73;
+}
+
+.btn-change,
+.btn-close-edit {
+  font-size: 13px;
+  color: #999;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.btn-change:hover {
+  color: #00b686;
+}
+.btn-close-edit {
+  float: right;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Misc */
+.profile-divider {
+  border: 0;
+  border-top: 1px solid #f0f0f0;
+  margin: 0;
+}
+.error-msg {
+  color: #be1e2d;
+  font-size: 13px;
+  margin: -10px 0 15px;
+  display: block;
+}
+.mb-10 {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+/* ===== 6. TAB: HISTORY & BOOKMARKS — GRID ===== */
+.news-grid-system {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.card-item {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s;
+}
+.card-item:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.img-wrap {
+  position: relative;
+  overflow: hidden;
+  padding-top: 62%;
+}
+.img-wrap img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+.card-item:hover .img-wrap img {
+  transform: scale(1.04);
+}
+
+.card-body {
+  padding: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-body h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #333;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ===== 7. TAB: COMMENTS — LIST ===== */
+.news-list-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.news-item-row {
+  display: flex;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: 0.2s;
+  text-decoration: none;
+  color: #333;
+  position: relative;
+}
+
+.news-item-row:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #17a2b8;
+  /* Màu xanh cyan cho comment */
+}
+
+.row-thumb {
+  width: 200px;
+  height: 140px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.row-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+
+.row-body {
+  padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.row-body h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #333;
+}
+
+.row-body h4:hover {
+  color: #007bff;
+}
+
+/* Style riêng cho phần nội dung bình luận */
+.my-comment-content {
+  background: #f1f8ff;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #444;
+  font-style: italic;
+  border-left: 3px solid #007bff;
+  margin-bottom: 10px;
+}
+
+.row-meta {
+  font-size: 12px;
+  color: #888;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-active {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* Hiện */
+.status-hidden {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* Ẩn */
+
+.btn-delete-cmt {
+  color: #dc3545;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #dc3545;
+  padding: 3px 10px;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.btn-delete-cmt:hover {
+  background: #dc3545;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .news-item-row {
+    flex-direction: column;
+  }
+
+  .row-thumb {
+    width: 100%;
+    height: 160px;
+  }
+}

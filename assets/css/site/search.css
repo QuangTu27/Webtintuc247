@@ -1,0 +1,161 @@
+/* =========================================================
+   GIAO DIỆN TRANG TÌM KIẾM BÀI VIẾT (search.css)
+========================================================= */
+.search-container {
+    padding: 30px 15px;
+    min-height: 500px;
+    max-width: 1100px; /* Ép khung bài viết gọn gàng giữa màn hình */
+    margin: 0 auto;
+}
+
+.search-title {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.highlight-keyword {
+    color: #007bff;
+}
+
+.search-meta {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.search-result-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===== TỪNG BÀI VIẾT ===== */
+.search-item {
+    display: flex;
+    gap: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.item-thumb-link {
+    flex-shrink: 0;
+}
+
+.item-thumb-img {
+    width: 200px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+}
+
+.item-thumb-link:hover .item-thumb-img {
+    opacity: 0.85; /* Hiệu ứng mờ ảnh nhẹ khi di chuột */
+}
+
+.item-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.item-title-link {
+    text-decoration: none;
+    color: #333;
+}
+
+.item-title {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    line-height: 1.4;
+    transition: color 0.2s ease;
+}
+
+.item-title-link:hover .item-title {
+    color: #007bff; /* Đổi màu xanh khi di chuột vào tiêu đề */
+}
+
+.item-summary {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.item-details {
+    font-size: 12px;
+    color: #999;
+    margin-top: auto; /* Tự đẩy thẻ ngày tháng xuống dưới cùng */
+}
+
+.item-category {
+    margin-right: 15px;
+    color: #d9534f;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* ===== TRẠNG THÁI RỖNG ===== */
+.search-empty {
+    padding: 50px 0;
+    text-align: center;
+    color: #888;
+}
+
+.empty-icon {
+    font-size: 48px;
+    color: #ddd;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.back-home-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-home-link:hover {
+    text-decoration: underline;
+}
+
+/* ===== PHÂN TRANG ===== */
+.search-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 40px;
+}
+
+.page-link {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.page-link:hover {
+    background: #f8f9fa;
+    border-color: #bbb;
+}
+
+.page-link.active {
+    background: #00b686;
+    color: #fff;
+    font-weight: bold;
+    border-color: #00b686;
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 600px) {
+    .search-item {
+        flex-direction: column; /* Đẩy ảnh lên trên chữ khi xem trên điện thoại */
+    }
+    .item-thumb-img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+}

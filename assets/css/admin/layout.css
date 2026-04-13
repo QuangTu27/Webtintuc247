@@ -1,0 +1,72 @@
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 230px;
+  background-color: #343a40;
+  color: white;
+  transition: all 0.3s;
+}
+
+.sidebar .brand {
+  padding: 20px;
+  background-color: #212529;
+  text-align: center;
+}
+
+.sidebar .brand h2 {
+  font-size: 20px;
+}
+
+.sidebar .menu {
+  list-style: none;
+  padding-top: 20px;
+}
+
+.sidebar .menu li a {
+  display: block;
+  padding: 15px 20px;
+  color: #c2c7d0;
+  text-decoration: none;
+  border-bottom: 1px solid #4b545c;
+}
+
+.sidebar .menu li a:hover {
+  background-color: #494e53;
+  color: white;
+}
+
+.sidebar .logout {
+  color: red !important;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-bar {
+  background-color: white;
+  padding: 15px 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  text-align: right;
+}
+
+.content-body {
+  padding: 30px;
+  flex: 1;
+}
+
+.sidebar .logout-link {
+  color: #e60c22;
+  padding: 10px 20px;
+  display: block;
+}
+
+.sidebar .logout-link:hover {
+  background-color: #e60c22;
+  color: white !important;
+}

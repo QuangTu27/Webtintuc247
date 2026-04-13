@@ -1,0 +1,31 @@
+/* Style cho nội dung bài viết chi tiết */
+.main-content {
+  font-size: 18px;
+  line-height: 1.6; /* Chiều cao dòng thoáng */
+  color: #333;
+  text-align: justify; /* Căn đều 2 bên */
+}
+
+/* Khoảng cách giữa các đoạn văn */
+.main-content p {
+  margin-bottom: 15px; /* Cách đoạn dưới 15px */
+  margin-top: 0;
+}
+
+/* Ảnh trong bài viết tự co giãn cho đẹp */
+.main-content img {
+  max-width: 100% !important; /* Không bị tràn màn hình */
+  height: auto !important;
+  display: block;
+  margin: 20px auto; /* Căn giữa ảnh */
+  border-radius: 4px;
+}
+
+/* Các thẻ Heading (H2, H3) trong bài */
+.main-content h2,
+.main-content h3 {
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #000;
+}

@@ -1,0 +1,114 @@
+.user-profile-box {
+  position: relative; /* Để menu con căn theo thằng này */
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Phần hiển thị trên Header (Avatar nhỏ + Tên) */
+.profile-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+}
+
+.user-avatar-mini {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%; /* Bo tròn */
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.name-text {
+  color: #ffffff;
+  font-size: 14px;
+}
+.user-name-text {
+  font-weight: bold;
+  color: #333333;
+  font-size: 16px;
+}
+
+/* Menu thả xuống (Mặc định ẩn) */
+.profile-dropdown {
+  display: none; /* Ẩn đi */
+  position: absolute;
+  top: 100%; /* Nằm ngay dưới */
+  right: 0;
+  width: 250px;
+  background: white;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15); /* Đổ bóng đẹp */
+  border-radius: 8px;
+  padding: 10px 0;
+  list-style: none;
+  z-index: 1000;
+  border: 1px solid #f0f0f0;
+}
+
+/* Hiệu ứng: Di chuột vào box thì hiện menu */
+.user-profile-box:hover .profile-dropdown {
+  display: block;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Header bên trong menu (Chứa avatar to) */
+.dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5px;
+}
+
+.avatar-large {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Các link trong menu */
+.profile-dropdown li a {
+  display: block;
+  padding: 10px 20px;
+  color: #555 !important;
+  font-size: 14px;
+  transition: 0.2s;
+  text-decoration: none;
+}
+
+.profile-dropdown li a:hover {
+  background-color: #f9f9f9;
+  color: #00b686 !important;
+  padding-left: 30px;
+}
+
+/* Gạch ngang phân cách */
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 5px 0;
+}
+
+.profile-dropdown li a.logout-link {
+  color: #d9534f !important;
+}
+.profile-dropdown li a.logout-link:hover {
+  background-color: #fff1f0 !important;
+}
+
+/* Animation hiện ra */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,139 @@
+.cat-header-wrapper {
+  display: flex;
+  align-items: baseline; /* Căn chân chữ cho đều */
+  border-bottom: 1px solid #dbdbdb; /* Đường kẻ dưới toàn bộ */
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Cho phép xuống dòng trên mobile */
+}
+
+/* Tiêu đề to (Cha) */
+.cat-title-large {
+  margin: 0;
+  padding-right: 20px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1;
+}
+
+.cat-title-large a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cat-title-large a:hover {
+  color: #00b686; /* Màu đỏ rượu khi hover tiêu đề chính */
+}
+
+/* Danh sách menu con */
+.cat-sub-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.cat-sub-nav li a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #555;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.cat-sub-nav li a:hover {
+  color: #00b686;
+}
+
+/* Trạng thái Active (Đang chọn) */
+.cat-sub-nav li a.active {
+  color: #00b686; /* Màu đỏ đậm nổi bật */
+  font-weight: 700;
+}
+
+/* --- 2. DANH SÁCH TIN TỨC --- */
+.cat-news-item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.cat-thumb {
+  width: 240px;
+  height: 150px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #f0f0f0;
+}
+
+.cat-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+.cat-news-item:hover .cat-thumb img {
+  transform: scale(1.05);
+}
+
+.cat-info {
+  flex: 1;
+}
+
+.cat-info h3 {
+  margin: 0 0 10px;
+}
+
+.cat-info h3 a {
+  text-decoration: none;
+  color: #222;
+  font-size: 18px; /* Kích thước tiêu đề tin */
+  font-weight: 700;
+  line-height: 1.4;
+  font-family: Arial, sans-serif; /* Font thường */
+}
+
+.cat-info h3 a:hover {
+  color: #00b686;
+}
+
+.cat-sapo {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* --- 3. PHÂN TRANG --- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 40px;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+}
+
+.pagination a:hover,
+.pagination a.active {
+  background: #00b686;
+  color: #fff;
+  border-color: #00b686;
+}
