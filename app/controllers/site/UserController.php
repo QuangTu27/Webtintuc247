@@ -263,25 +263,6 @@ class UserController extends Controller
         exit;
     }
 
-    /** POST /user/bookmark — Toggle bookmark (dùng từ trang chi tiết tin) */
-    public function bookmark()
-    {
-        $this->requireLogin();
-        header('Content-Type: application/json');
-
-        $input = json_decode(file_get_contents('php://input'), true) ?? [];
-        $newsId = (int)($input['news_id'] ?? 0);
-
-        if ($newsId <= 0) {
-            echo json_encode(['status' => 'error', 'message' => 'ID không hợp lệ']);
-            exit;
-        }
-
-        $saved = $this->model('UserProfileModel')->toggleBookmark($this->getUserId(), $newsId);
-        echo json_encode(['status' => 'success', 'action' => $saved ? 'saved' : 'unsaved']);
-        exit;
-    }
-
     /** POST /user/delete-bookmark — Bỏ lưu một bài */
     public function deleteBookmark()
     {

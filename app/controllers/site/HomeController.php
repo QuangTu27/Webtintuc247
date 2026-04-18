@@ -4,32 +4,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $CategoriesModel = $this->model('CategoriesModel');
-        $userModel = $this->model('UserModel');
-        
-        $menuItems = $CategoriesModel->getAll();
-        
-        $avatar = 'default_avatar.png';
-        $displayName = 'Người dùng';
-        $username = 'Guest';
-        
-        if (isset($_SESSION['client_logged_in']) && $_SESSION['client_logged_in'] === true && isset($_SESSION['client_id'])) {
-            $user = $userModel->getById($_SESSION['client_id']);
-            if ($user && is_object($user)) {
-                $avatar = !empty($user->avatar) ? $user->avatar : 'default_avatar.png';
-                $displayName = !empty($user->hoten) ? $user->hoten : $user->username;
-                $username = !empty($user->username) ? $user->username : '';
-            }
-        }
-        
-        $data = [
-            'menuItems' => $menuItems,
-            'avatar' => $avatar,
-            'displayName' => $displayName,
-            'username' => $username,
-        ];
-        
-        
+        $data = $this->getClientViewData();
+
         $this->view('site/layouts/header', $data);
         $this->view('site/home');
         $this->view('site/layouts/footer');

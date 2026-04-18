@@ -9,32 +9,9 @@ class NewsController extends Controller
             exit;
         }
 
-        $CategoriesModel = $this->model('CategoriesModel');
-        $userModel = $this->model('UserModel');
-        
-        $menuItems = $CategoriesModel->getAll();
-        
-        $avatar = 'default_avatar.svg';
-        $displayName = 'Người dùng';
-        $username = 'Guest';
-        
-        if (isset($_SESSION['client_logged_in']) && $_SESSION['client_logged_in'] === true && isset($_SESSION['client_id'])) {
-            $user = $userModel->getById($_SESSION['client_id']);
-            if ($user && is_object($user)) {
-                $avatar = !empty($user->avatar) ? $user->avatar : 'default_avatar.svg';
-                $displayName = !empty($user->hoten) ? $user->hoten : $user->username;
-                $username = !empty($user->username) ? $user->username : '';
-            }
-        }
-        
-        $data = [
-            'menuItems' => $menuItems,
-            'avatar' => $avatar,
-            'displayName' => $displayName,
-            'username' => $username,
-            'newsId' => (int)$newsId
-        ];
-        
+        $data = $this->getClientViewData();
+        $data['newsId'] = (int)$newsId;
+
         $this->view('site/layouts/header', $data);
         $this->view('site/news_detail', $data);
         $this->view('site/layouts/footer');
@@ -119,18 +96,16 @@ class NewsController extends Controller
 
         $data = json_decode(file_get_contents('php://input'), true);
         $newsId = isset($data['news_id']) ? (int)$data['news_id'] : 0;
-        
+
         if (!isset($_SESSION['client_logged_in']) || $_SESSION['client_logged_in'] !== true || $newsId <= 0) {
             echo json_encode(['status' => 'error', 'message' => 'Vui lòng đăng nhập']);
             exit;
         }
 
-        $newsModel = $this->model('NewsDetailModel');
-        $action = $newsModel->toggleSave($_SESSION['client_id'], $newsId);
-        
+        $saved = $this->model('UserProfileModel')->toggleBookmark((int)$_SESSION['client_id'], $newsId);
         echo json_encode([
             'status' => 'success',
-            'action' => $action
+            'action' => $saved ? 'saved' : 'unsaved'
         ]);
         exit;
     }

@@ -89,7 +89,7 @@ class AuthController extends Controller
     public function logout()
     {
         foreach ($_SESSION as $key => $value) {
-            if (strpos($key, 'client_') === 0 || strpos($key, 'user_') === 0) {
+            if (strpos($key, 'client_') === 0) {
                 unset($_SESSION[$key]);
             }
         }

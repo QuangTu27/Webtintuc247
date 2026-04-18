@@ -11,7 +11,7 @@
 
         <div class="form-group">
             <label>Password</label>
-            <input type="password" id="password" placeholder="Nhập mật khẩu ít nhất 6 ký tự..." required>
+            <input type="password" id="password" placeholder="Nhập mật khẩu" required>
             <small class="form-hint">*Mật khẩu nên bao gồm cả chữ cái và chữ số.*</small>
         </div>
 

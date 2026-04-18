@@ -1,8 +1,5 @@
 <?php
-/**
- * UserProfileModel
- * Quản lý toàn bộ thao tác dữ liệu liên quan đến hồ sơ cá nhân người dùng site.
- */
+
 class UserProfileModel
 {
     private Database $db;
@@ -72,7 +69,7 @@ class UserProfileModel
         return $this->getViewedNewsByIds($ids);
     }
 
-    public function getViewedNewsByIds(array $ids): array
+    private function getViewedNewsByIds(array $ids): array
     {
         if (empty($ids)) return [];
         $placeholders = implode(',', array_fill(0, count($ids), '?'));
@@ -123,15 +120,6 @@ class UserProfileModel
         return true;
     }
 
-    public function isBookmarked(int $userId, int $newsId): bool
-    {
-        $row = $this->db->fetch(
-            "SELECT id FROM tbl_bookmarks WHERE user_id = ? AND news_id = ?",
-            [$userId, $newsId]
-        );
-        return $row !== false;
-    }
-
     public function getComments(int $userId): array
     {
         return $this->db->fetchAll(
@@ -157,13 +145,4 @@ class UserProfileModel
         return false;
     }
 
-    public function getMyComments(int $userId): array
-    {
-        return $this->getComments($userId);
-    }
-
-    public function changePassword(int $userId, string $newPassword): bool
-    {
-        return $this->updatePassword($userId, $newPassword);
-    }
 }
