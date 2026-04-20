@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadProfileData() {
     try {
-        const response = await fetch(BASE_URL + 'admin/profile/data');
+        const response = await fetch(BASE_URL + 'api/profile');
         const result = await response.json();
 
         if (result.status === 'success') {
@@ -66,7 +66,7 @@ async function updateProfile() {
     }
 
     try {
-        const response = await fetch(BASE_URL + 'admin/profile/update', { 
+        const response = await fetch(BASE_URL + 'api/profile', { 
             method: 'POST', 
             body: formData 
         });

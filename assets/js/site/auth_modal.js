@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                const res = await fetch(AUTH_BASE_URL + 'auth/register', {
+                const res = await fetch(AUTH_BASE_URL + 'api/site/auth/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ hoten, username, email, password })
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('login-password').value;
 
             try {
-                const res = await fetch(AUTH_BASE_URL + 'auth/login', {
+                const res = await fetch(AUTH_BASE_URL + 'api/site/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, password })

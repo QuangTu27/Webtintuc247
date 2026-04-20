@@ -74,12 +74,12 @@ async function loadNews() {
     tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px;">Đang tải dữ liệu...</td></tr>';
 
     try {
-        const response = await fetch(BASE_URL + 'admin/news/data?category_id=' + filterId);
+        const response = await fetch(BASE_URL + 'api/news?category_id=' + filterId);
         const result = await response.json();
 
         const filterCatElement = document.getElementById('filterCategory');
         if (filterId == 0 && filterCatElement && filterCatElement.options.length <= 1) {
-            const resCat = await fetch(BASE_URL + 'admin/news/formdata');
+            const resCat = await fetch(BASE_URL + 'api/news/formdata');
             const dataCat = await resCat.json();
             if (dataCat.status === 'success') {
                 let filterHtml = '<option value="0">-- Tất cả danh mục --</option>';
@@ -175,7 +175,7 @@ window.updateStatus = async function(id, action) {
     body.append('id', id);
     body.append('action', 'update_status');
     body.append('status_action', action);
-    const res = await fetch(BASE_URL + 'admin/news/status', { method: 'POST', body: body });
+    const res = await fetch(BASE_URL + 'api/news/status', { method: 'POST', body: body });
     const result = await res.json();
     if (result.status === 'success') { 
         showMsg('Cập nhật trạng thái thành công!'); 
@@ -186,7 +186,7 @@ window.updateStatus = async function(id, action) {
 
 window.deleteNews = async function(id) {
     if (!confirm('Xác nhận xoá bài viết?')) return;
-    const res = await fetch(BASE_URL + 'admin/news/delete/' + id, {method: 'DELETE'});
+    const res = await fetch(BASE_URL + 'api/news/' + id, {method: 'DELETE'});
     const result = await res.json();
     if (result.status === 'success') { 
         showMsg('Đã xoá bài viết.'); 
@@ -199,7 +199,7 @@ async function deleteMultiple() {
     if (!isAdminOrEditorAuth) return;
     const cbs = Array.from(document.querySelectorAll('.news-check:checked')).map(cb => cb.value);
     if (cbs.length == 0 || !confirm('Xác nhận xoá các bài đã chọn?')) return;
-    const res = await fetch(BASE_URL + 'admin/news/delete', {
+    const res = await fetch(BASE_URL + 'api/news', {
         method: 'DELETE', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ids: cbs})
     });
     const result = await res.json();
@@ -237,7 +237,7 @@ async function initAddForm() {
     }
     
     try {
-        const res = await fetch(BASE_URL + 'admin/news/formdata');
+        const res = await fetch(BASE_URL + 'api/news/formdata');
         const data = await res.json();
 
         if (data.status === 'success') {
@@ -293,7 +293,7 @@ async function submitAddForm(e) {
     }
 
     try {
-        const res = await fetch(BASE_URL + 'admin/news/store', { method: 'POST', body: formData });
+        const res = await fetch(BASE_URL + 'api/news', { method: 'POST', body: formData });
         const result = await res.json();
         if (result.status === 'success') {
             window.location.href = BASE_URL + 'admin/news';
@@ -321,10 +321,10 @@ async function submitAddForm(e) {
 // ---------------- EDIT LOGIC ----------------
 async function initEditForm() {
     try {
-        const resCat = await fetch(BASE_URL + 'admin/news/formdata');
+        const resCat = await fetch(BASE_URL + 'api/news/formdata');
         const dataCat = await resCat.json();
 
-        const resPost = await fetch(BASE_URL + 'admin/news/show/' + newsId);
+        const resPost = await fetch(BASE_URL + 'api/news/' + newsId);
         const dataPost = await resPost.json();
 
         if (dataPost.status === 'success' && dataCat.status === 'success') {
@@ -415,7 +415,7 @@ async function submitEditForm(e) {
     }
 
     try {
-        const res = await fetch(BASE_URL + 'admin/news/update', { method: 'POST', body: formData });
+        const res = await fetch(BASE_URL + 'api/news/' + newsId, { method: 'POST', body: formData });
         const result = await res.json();
         if (result.status === 'success') {
             window.location.href = BASE_URL + 'admin/news';

@@ -18,7 +18,7 @@ async function handleLogin(e) {
     btn.disabled = true;
 
     try {
-        const response = await fetch(BASE_URL + 'admin/auth/loginSubmit', {
+        const response = await fetch(BASE_URL + 'api/admin/auth/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({username: u, password: p})

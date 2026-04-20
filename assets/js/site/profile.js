@@ -32,7 +32,7 @@ let currentUser = {};
 
 async function loadUserInfo() {
     try {
-        const res = await fetch(BASE_URL + 'user/info');
+        const res = await fetch(BASE_URL + 'api/site/user/info');
         const result = await res.json();
         if (result.status === 'success') {
             currentUser = result.data;
@@ -214,7 +214,7 @@ function renderGeneral() {
             const btn = formAvatar.querySelector('button[type=submit]');
             btn.disabled = true; btn.innerText = 'Đang tải lên...';
             try {
-                const res = await fetch(BASE_URL + 'user/updateAvatar', { method: 'POST', body: fd });
+                const res = await fetch(BASE_URL + 'api/site/user/avatar', { method: 'POST', body: fd });
                 const result = await res.json();
                 if (result.status === 'success') {
                     currentUser.avatar = result.avatar;
@@ -236,7 +236,7 @@ function renderGeneral() {
             e.preventDefault();
             const fd = new FormData(formName);
             try {
-                const res = await fetch(BASE_URL + 'user/updateName', { method: 'POST', body: fd });
+                const res = await fetch(BASE_URL + 'api/site/user/name', { method: 'POST', body: fd });
                 const result = await res.json();
                 alert(result.message);
                 if (result.status === 'success') {
@@ -253,7 +253,7 @@ function renderGeneral() {
             e.preventDefault();
             const fd = new FormData(formEmail);
             try {
-                const res = await fetch(BASE_URL + 'user/updateEmail', { method: 'POST', body: fd });
+                const res = await fetch(BASE_URL + 'api/site/user/email', { method: 'POST', body: fd });
                 const result = await res.json();
                 alert(result.message);
                 if (result.status === 'success') {
@@ -278,7 +278,7 @@ function renderGeneral() {
             errEl.style.display = 'none';
             const payload = Object.fromEntries(new FormData(formPass).entries());
             try {
-                const res = await fetch(BASE_URL + 'user/changePassword', {
+                const res = await fetch(BASE_URL + 'api/site/user/password', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -319,7 +319,7 @@ function bindToggleEditBtn(btnId, closeId, viewId, editId) {
 async function fetchAndRenderComments() {
     setLoading();
     try {
-        const res = await fetch(BASE_URL + 'user/comments');
+        const res = await fetch(BASE_URL + 'api/site/user/comments');
         const result = await res.json();
         if (!result.data || result.data.length === 0) {
             setContent(`
@@ -369,8 +369,8 @@ async function fetchAndRenderComments() {
         document.querySelectorAll('.btn-delete-cmt').forEach(btn => {
             btn.addEventListener('click', async () => {
                 if (!confirm('Bạn muốn xóa bình luận này?')) return;
-                const result = await fetch(BASE_URL + 'user/deleteComment', {
-                    method: 'POST',
+                const result = await fetch(BASE_URL + 'api/site/user/comments', {
+                    method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ comment_id: parseInt(btn.dataset.id) })
                 }).then(r => r.json());
@@ -389,7 +389,7 @@ async function fetchAndRenderComments() {
 async function fetchAndRenderBookmarks() {
     setLoading();
     try {
-        const res = await fetch(BASE_URL + 'user/bookmarks');
+        const res = await fetch(BASE_URL + 'api/site/user/bookmarks');
         const result = await res.json();
 
         if (!result.data || result.data.length === 0) {
@@ -432,8 +432,8 @@ async function fetchAndRenderBookmarks() {
         document.querySelectorAll('.btn-unbookmark').forEach(btn => {
             btn.addEventListener('click', async () => {
                 if (!confirm('Bạn muốn bỏ lưu tin này?')) return;
-                const result = await fetch(BASE_URL + 'user/deleteBookmark', {
-                    method: 'POST',
+                const result = await fetch(BASE_URL + 'api/site/user/bookmarks', {
+                    method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ news_id: parseInt(btn.dataset.id) })
                 }).then(r => r.json());
@@ -451,7 +451,7 @@ async function fetchAndRenderBookmarks() {
 async function fetchAndRenderHistory() {
     setLoading();
     try {
-        const res = await fetch(BASE_URL + 'user/history');
+        const res = await fetch(BASE_URL + 'api/site/user/history');
         const result = await res.json();
 
         if (!result.data || result.data.length === 0) {
@@ -504,17 +504,17 @@ async function fetchAndRenderHistory() {
 
         document.getElementById('btn-clear-history')?.addEventListener('click', async () => {
             if (!confirm('Bạn có chắc muốn xóa toàn bộ lịch sử xem tin?')) return;
-            await fetch(BASE_URL + 'user/clearHistory', { method: 'POST' }).then(r => r.json());
+            await fetch(BASE_URL + 'api/site/user/history', { method: 'DELETE', headers: {'Content-Type':'application/json'}, body: JSON.stringify({action:'clear'}) }).then(r => r.json());
             fetchAndRenderHistory();
         });
 
         document.querySelectorAll('.btn-del-history').forEach(btn => {
             btn.addEventListener('click', async () => {
                 if (!confirm('Bạn muốn xóa bài viết này khỏi lịch sử?')) return;
-                await fetch(BASE_URL + 'user/deleteHistoryItem', {
-                    method: 'POST',
+                await fetch(BASE_URL + 'api/site/user/history', {
+                    method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ news_id: parseInt(btn.dataset.id) })
+                    body: JSON.stringify({ action: 'delete_item', news_id: parseInt(btn.dataset.id) })
                 });
                 fetchAndRenderHistory();
             });

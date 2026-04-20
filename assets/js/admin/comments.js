@@ -63,7 +63,7 @@ async function loadList() {
     tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 40px;">Đang tải...</td></tr>';
 
     try {
-        let url = BASE_URL + 'admin/comments/data?a=1';
+        let url = BASE_URL + 'api/comments?a=1';
         if (catId > 0) url += '&cat_id=' + catId;
         if (q) url += '&q=' + encodeURIComponent(q);
 
@@ -142,7 +142,7 @@ async function loadComments() {
     if (!tbody) return;
 
     try {
-        const response = await fetch(BASE_URL + 'admin/comments/data/' + newsId);
+        const response = await fetch(BASE_URL + 'api/comments/' + newsId);
         const result = await response.json();
 
         if (result.status === 'success') {
@@ -195,7 +195,7 @@ async function loadComments() {
 async function deleteComment(id) {
     if (!confirm('Bạn có chắc chắn muốn xoá bình luận này?')) return;
     try {
-        const res = await fetch(BASE_URL + 'admin/comments/delete/' + id, { method: 'DELETE' });
+        const res = await fetch(BASE_URL + 'api/comments/' + id, { method: 'DELETE' });
         const result = await res.json();
         if (result.status === 'success') {
             const m = document.getElementById('status-msg');

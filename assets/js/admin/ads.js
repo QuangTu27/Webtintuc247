@@ -80,7 +80,7 @@ async function loadAds() {
     tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px;">Đang tải...</td></tr>';
 
     try {
-        let url = BASE_URL + 'admin/ads/data';
+        let url = BASE_URL + 'api/ads';
         if (search) url += '?search=' + encodeURIComponent(search);
 
         const response = await fetch(url);
@@ -133,7 +133,7 @@ async function loadAds() {
 async function deleteAd(id) {
     if (!confirm('Bạn có chắc muốn xoá quảng cáo này?')) return;
     try {
-        const res = await fetch(BASE_URL + 'admin/ads/delete/' + id, { method: 'DELETE' });
+        const res = await fetch(BASE_URL + 'api/ads/' + id, { method: 'DELETE' });
         const result = await res.json();
         if (result.status === 'success') { 
             showMsg('🗑️ Đã xoá quảng cáo.'); 
@@ -147,7 +147,7 @@ async function deleteMultiple() {
     const cbs = Array.from(document.querySelectorAll('.ad-check:checked')).map(cb => cb.value);
     if (cbs.length === 0 || !confirm('Xác nhận xoá ' + cbs.length + ' mục?')) return;
     try {
-        const res = await fetch(BASE_URL + 'admin/ads/delete', {
+        const res = await fetch(BASE_URL + 'api/ads', {
             method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ids: cbs })
         });
         const result = await res.json();
@@ -195,7 +195,7 @@ async function submitAdd() {
     }
 
     try {
-        const response = await fetch(BASE_URL + 'admin/ads/store', { method: 'POST', body: formParams });
+        const response = await fetch(BASE_URL + 'api/ads', { method: 'POST', body: formParams });
         const result = await response.json();
         if (result.status === 'success') {
             window.location.href = BASE_URL + 'admin/ads';
@@ -210,7 +210,7 @@ async function submitAdd() {
 
 async function initEditForm() {
     try {
-        const res = await fetch(BASE_URL + 'admin/ads/show/' + adId);
+        const res = await fetch(BASE_URL + 'api/ads/' + adId);
         const result = await res.json();
 
         if (result.status === 'success') {
@@ -251,7 +251,7 @@ async function submitEdit() {
     }
 
     try {
-        const response = await fetch(BASE_URL + 'admin/ads/update/' + adId, { method: 'POST', body: formParams });
+        const response = await fetch(BASE_URL + 'api/ads/' + adId, { method: 'POST', body: formParams });
         const result = await response.json();
         if (result.status === 'success') {
             window.location.href = BASE_URL + 'admin/ads';

@@ -4,7 +4,7 @@ let globalAds = {};
 
 async function fetchHomeData() {
     try {
-        const res = await fetch(`${BASE_URL}home/data?page=${currentPage}`);
+        const res = await fetch(`${BASE_URL}api/site/home?page=${currentPage}`);
         const result = await res.json();
 
         if (result.status === 'success') {

@@ -1,6 +1,6 @@
 async function fetchCategoryData() {
     try {
-        const res = await fetch(`${BASE_URL}categories/${catId}/data?page=${page}`);
+        const res = await fetch(`${BASE_URL}api/site/categories/${catId}?page=${page}`);
         const result = await res.json();
 
         if (result.status === 'success') {

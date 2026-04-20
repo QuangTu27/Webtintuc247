@@ -21,7 +21,7 @@ async function fetchSearchData() {
     }
 
     try {
-        const res    = await fetch(`${BASE_URL}search/data?keyword=${encodeURIComponent(keyword)}&page=${page}`);
+        const res    = await fetch(`${BASE_URL}api/site/search?keyword=${encodeURIComponent(keyword)}&page=${page}`);
         const result = await res.json();
 
         if (loading) loading.style.display = 'none';

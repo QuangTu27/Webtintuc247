@@ -18,10 +18,7 @@ class Controller
         }
     }
 
-    /**
-     * Trả về dữ liệu dùng chung cho tất cả site views:
-     * menuItems, avatar, displayName, username của user hiện tại.
-     */
+
     protected function getClientViewData(): array
     {
         $menuItems = $this->model('CategoriesModel')->getAll();

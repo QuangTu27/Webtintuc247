@@ -11,44 +11,108 @@ class App
     {
         $url = $this->parseUrl();
 
-        // Xác định không gian làm việc (namespace: site dường như mặc định, admin nếu url bắt đầu bằng 'admin')
-        if (isset($url[0]) && strtolower($url[0]) === 'admin') {
-            $this->namespace = 'admin';
-            $this->controller = 'DashboardController';
-            unset($url[0]);
-            $url = array_values($url);
+        if (isset($url[0])) {
+            if (strtolower($url[0]) === 'api') {
+                $this->namespace = 'api/admin';
+                $this->controller = 'Index'; 
+                unset($url[0]);
+                $url = array_values($url);
+
+                if (isset($url[0])) {
+                    if (strtolower($url[0]) === 'site') {
+                        $this->namespace = 'api/site';
+                        unset($url[0]);
+                        $url = array_values($url);
+                    } elseif (strtolower($url[0]) === 'admin') {
+                        $this->namespace = 'api/admin';
+                        unset($url[0]);
+                        $url = array_values($url);
+                    }
+                }
+            } elseif (strtolower($url[0]) === 'admin') {
+                $this->namespace = 'admin';
+                $this->controller = 'DashboardController';
+                unset($url[0]);
+                $url = array_values($url);
+            }
+        }
+
+        // Tìm đường dẫn thư mục controller
+        if (str_starts_with($this->namespace, 'api')) {
+            $controllerDir = APPROOT . '/' . $this->namespace . '/';
+        } else {
+            $controllerDir = APPROOT . '/controllers/' . $this->namespace . '/';
         }
 
         // Tìm controller file
-        $controllerName = isset($url[0]) ? ucfirst($url[0]) . 'Controller' : $this->controller;
-        $controllerFile = APPROOT . '/controllers/' . $this->namespace . '/' . $controllerName . '.php';
+        if (str_starts_with($this->namespace, 'api')) {
+            $controllerName = isset($url[0]) ? ucfirst($url[0]) : $this->controller;
+        } else {
+            $controllerName = isset($url[0]) ? ucfirst($url[0]) . 'Controller' : $this->controller;
+        }
+        $controllerFile = $controllerDir . $controllerName . '.php';
 
         if (isset($url[0]) && file_exists($controllerFile)) {
             $this->controller = $controllerName;
             unset($url[0]);
             $url = array_values($url);
         } else {
-            $controllerFile = APPROOT . '/controllers/' . $this->namespace . '/' . $this->controller . '.php';
+            $controllerFile = $controllerDir . $this->controller . '.php';
         }
 
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
             $this->controller = new $this->controller();
-            
-            // Tìm method (hàm)
-            if (isset($url[0]) && method_exists($this->controller, $url[0])) {
-                $this->method = $url[0];
-                unset($url[0]);
-                $url = array_values($url);
+            if (str_starts_with($this->namespace, 'api')) {
+                $httpMethod = $_SERVER['REQUEST_METHOD'];
+                $id = isset($url[0]) ? $url[0] : null;
+
+                if ($id !== null && is_numeric($id)) {
+                    switch ($httpMethod) {
+                        case 'GET': $this->method = 'show'; break;
+                        case 'POST': 
+                        case 'PUT':
+                        case 'PATCH': $this->method = 'update'; break;
+                        case 'DELETE': $this->method = 'destroy'; break;
+                        default: $this->method = 'index';
+                    }
+                    $this->params = [(int)$id]; 
+                    unset($url[0]);
+                    $url = array_values($url);
+                } else {
+                    // Nếu URL KHÔNG có ID: /api/users
+                    switch ($httpMethod) {
+                        case 'GET': $this->method = 'index'; break;
+                        case 'POST': $this->method = 'store'; break;
+                        case 'DELETE': $this->method = 'destroy'; break; 
+                        default: $this->method = 'index';
+                    }
+                    if (isset($url[0]) && !is_numeric($url[0]) && method_exists($this->controller, $url[0])) {
+                        $this->method = $url[0];
+                        unset($url[0]);
+                        $url = array_values($url);
+                    }
+                    $this->params = []; 
+                }
+
+                if (!method_exists($this->controller, $this->method)) {
+                    header('Content-Type: application/json');
+                    http_response_code(405);
+                    echo json_encode(['status' => 'error', 'message' => "Method {$httpMethod} Not Allowed on {$this->method}"]);
+                    exit;
+                }
+            } else {
+                if (isset($url[0]) && method_exists($this->controller, $url[0])) {
+                    $this->method = $url[0];
+                    unset($url[0]);
+                    $url = array_values($url);
+                }
+                $this->params = $url ? array_values($url) : [];
             }
         } else {
             die("Controller file not found: " . $controllerFile);
         }
 
-        // Lấy params
-        $this->params = $url ? array_values($url) : [];
-
-        // Gọi method và truyền params
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
 

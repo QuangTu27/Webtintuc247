@@ -120,12 +120,12 @@ async function loadUsers() {
     tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 40px;">Đang tải dữ liệu...</td></tr>';
 
     try {
-        const response = await fetch(BASE_URL + `admin/users/data?keyword=${keyword}`);
+        const response = await fetch(BASE_URL + `api/users?keyword=${keyword}`);
         const result = await response.json();
 
         if (result.status === 'success') {
-            currentAdminId = result.auth.userId;
-            renderTable(result.data, currentAdminId);
+            currentAdminId = result.data.auth.userId;
+            renderTable(result.data.users, currentAdminId);
         } else {
             tbody.innerHTML = `<tr><td colspan="6" style="color:red; text-align:center;">${result.message}</td></tr>`;
         }
@@ -204,7 +204,7 @@ async function deleteUser(id) {
     if (!confirm('Bạn có chắc chắn muốn xoá người dùng này?')) return;
     
     try {
-        const res = await fetch(BASE_URL + 'admin/users/delete/' + id, {method:'DELETE'});
+        const res = await fetch(BASE_URL + 'api/users/' + id, {method:'DELETE'});
         const result = await res.json();
         
         if (result.status === 'success') {
@@ -223,7 +223,7 @@ async function deleteMultiple() {
     if (cbs.length == 0 || !confirm(`Bạn có chắc chắn muốn xoá ${cbs.length} người dùng đã chọn?`)) return;
 
     try {
-        const res = await fetch(BASE_URL + 'admin/users/delete', {
+        const res = await fetch(BASE_URL + 'api/users', {
             method: 'DELETE', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ids: cbs})
         });
         const result = await res.json(); 
@@ -242,7 +242,7 @@ async function deleteMultiple() {
 // ---------- API CỦA TRANG THÊM/SỬA ----------
 async function initUserForm() {
     try {
-        const resItem = await fetch(BASE_URL + 'admin/users/show/' + USER_ID);
+        const resItem = await fetch(BASE_URL + 'api/users/' + USER_ID);
         const rItem = await resItem.json();
         
         if (rItem.status === 'success') {
@@ -251,11 +251,11 @@ async function initUserForm() {
             document.getElementById('email').value = rItem.data.email || '';
             document.getElementById('role').value = rItem.data.role;
 
-            const currentUser = await fetch(BASE_URL + 'admin/users/data?keyword=');
+            const currentUser = await fetch(BASE_URL + 'api/users?keyword=');
             const dataResult = await currentUser.json();
             
             if (dataResult.status === 'success') {
-                if (dataResult.auth.userId == rItem.data.id) {
+                if (dataResult.data.auth.userId == rItem.data.id) {
                     document.getElementById('adminWarning').style.display = 'block';
                 }
             }
@@ -294,11 +294,11 @@ async function submitUserForm() {
     }
 
     try {
-        let endpoint = BASE_URL + 'admin/users/store';
+        let endpoint = BASE_URL + 'api/users';
         let method = 'POST';
 
         if (isEdit) {
-            endpoint = BASE_URL + 'admin/users/update/' + USER_ID;
+            endpoint = BASE_URL + 'api/users/' + USER_ID;
             method = 'PUT';
         }
 

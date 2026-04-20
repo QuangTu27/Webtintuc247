@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchNewsDetail() {
     try {
-        const res = await fetch(`${BASE_URL}news/detail/${nId}`);
+        const res = await fetch(`${BASE_URL}api/site/news/${nId}`);
         const result = await res.json();
 
         if (result.status === 'success') {
@@ -178,14 +178,14 @@ function generateCommentHTML(c, isChild = false) {
 
 async function toggleLike() {
     if (!sessionState.logged_in) { alert("Bạn cần đăng nhập!"); return; }
-    const res = await fetch(`${BASE_URL}news/like`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'toggle_like', news_id: nId}) });
+    const res = await fetch(`${BASE_URL}api/site/news/like`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'toggle_like', news_id: nId}) });
     const data = await res.json();
     if (data.status === 'success') { fetchNewsDetail(); }
 }
 
 async function toggleSave() {
     if (!sessionState.logged_in) { alert("Bạn cần đăng nhập!"); return; }
-    const res = await fetch(`${BASE_URL}news/save`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'toggle_save', news_id: nId}) });
+    const res = await fetch(`${BASE_URL}api/site/news/save`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'toggle_save', news_id: nId}) });
     const data = await res.json();
     if (data.status === 'success') { fetchNewsDetail(); }
 }
@@ -196,7 +196,7 @@ async function postComment(parentId = null) {
     if (!contentEl) return;
     let nd = contentEl.value;
     if (nd.trim() === '') { alert("Vui lòng nhập nội dung!"); return; }
-    const res = await fetch(`${BASE_URL}news/comment`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'post_comment', news_id: nId, parent_id: parentId, noidung: nd}) });
+    const res = await fetch(`${BASE_URL}api/site/news/comment`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'post_comment', news_id: nId, parent_id: parentId, noidung: nd}) });
     const data = await res.json();
     if (data.status === 'success') { 
         fetchNewsDetail(); 
@@ -217,7 +217,7 @@ function closeEdit(id) {
 async function execEdit(id) {
     let nd = document.getElementById(`input-edit-${id}`).value;
     if (nd.trim() === '') { alert("Vui lòng nhập nội dung!"); return; }
-    const res = await fetch(`${BASE_URL}news/comment/edit`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'edit_comment', comment_id: id, noidung: nd}) });
+    const res = await fetch(`${BASE_URL}api/site/news/comment`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'edit_comment', comment_id: id, noidung: nd}) });
     const data = await res.json();
     if (data.status === 'success') { 
         const textDiv = document.getElementById(`text-${id}`);
@@ -229,7 +229,7 @@ async function execEdit(id) {
 
 async function execDelete(id) {
     if (!confirm("Bạn chắc muốn thao tác này?")) return;
-    const res = await fetch(`${BASE_URL}news/comment/delete`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'delete_comment', comment_id: id}) });
+    const res = await fetch(`${BASE_URL}api/site/news/comment`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'delete_comment', comment_id: id}) });
     const data = await res.json();
     if (data.status === 'success') { fetchNewsDetail(); }
     else alert("Lỗi: " + data.message);

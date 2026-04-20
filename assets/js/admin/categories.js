@@ -112,7 +112,7 @@ async function loadCategories() {
     tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 40px;">Đang tải dữ liệu...</td></tr>';
 
     try {
-        const response = await fetch(BASE_URL + `admin/categories/data?filter_id=${filterId}&keyword=${keyword}`);
+        const response = await fetch(BASE_URL + `api/categories?filter_id=${filterId}&keyword=${keyword}`);
         const result = await response.json();
 
         if (result.status === 'success') {
@@ -196,7 +196,7 @@ function renderTable(data, auth) {
 async function deleteCat(id) {
     if (!canDeleteAuth) return;
     if (!confirm('Xác nhận xoá?')) return;
-    const res = await fetch(BASE_URL + 'admin/categories/delete/' + id, {method:'DELETE'});
+    const res = await fetch(BASE_URL + 'api/categories/' + id, {method:'DELETE'});
     const result = await res.json();
     if (result.status === 'success') {
         showNotification('Đã xoá danh mục thành công!', 'success');
@@ -211,7 +211,7 @@ async function deleteMultiple() {
     const cbs = Array.from(document.querySelectorAll('.cat-check:checked')).map(cb => cb.value);
     if (cbs.length == 0 || !confirm('Xác nhận xoá?')) return;
 
-    const res = await fetch(BASE_URL + 'admin/categories/delete', {
+    const res = await fetch(BASE_URL + 'api/categories', {
         method: 'DELETE', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ids: cbs})
     });
     const result = await res.json(); 
@@ -240,7 +240,7 @@ function updateDeleteBtn() {
 // --- CÁC HÀM CỦA TRANG THÊM/SỬA FORM ---
 async function initCategoryForm() {
     try {
-        const resForm = await fetch(BASE_URL + 'admin/categories/formdata');
+        const resForm = await fetch(BASE_URL + 'api/categories/formdata');
         const rForm = await resForm.json();
 
         if (rForm.status === 'success') {
@@ -249,7 +249,7 @@ async function initCategoryForm() {
             let currentManagerId = 0;
 
             if (CATEGORY_ID > 0) {
-                const resItem = await fetch(BASE_URL + 'admin/categories/show/' + CATEGORY_ID);
+                const resItem = await fetch(BASE_URL + 'api/categories/' + CATEGORY_ID);
                 const rItem = await resItem.json();
                 if (rItem.status === 'success') {
                     document.getElementById('catName').value = rItem.data.name;
@@ -306,11 +306,11 @@ async function submitCategoryForm() {
     }
 
     try {
-        let endpoint = BASE_URL + 'admin/categories/store';
+        let endpoint = BASE_URL + 'api/categories';
         let method = 'POST';
 
         if (CATEGORY_ID > 0) {
-            endpoint = BASE_URL + 'admin/categories/update/' + CATEGORY_ID;
+            endpoint = BASE_URL + 'api/categories/' + CATEGORY_ID;
             method = 'PUT';
         }
 

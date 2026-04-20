@@ -1,13 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() { 
-    const dashboardUI = document.getElementById('dashboardUI');
-    if (dashboardUI) {
-        loadDashboard(); 
-    }
+    loadDashboard(); 
 });
 
 async function loadDashboard() {
     try {
-        const response = await fetch(BASE_URL + 'admin/dashboard/data');
+        const response = await fetch(BASE_URL + 'api/admin/dashboard');
         const result = await response.json();
 
         if (result.status === 'success') {
@@ -65,10 +62,20 @@ async function loadDashboard() {
             const dbLoading = document.getElementById('dbLoading');
             if (dbLoading) dbLoading.style.display = 'none';
             
-            dashboardUI.style.display = 'block';
+            const dbUI = document.getElementById('dashboardUI');
+            if (dbUI) dbUI.style.display = 'block';
+        } else {
+            // Lỗi API (ví dụ: chưa đăng nhập)
+            const dbLoading = document.getElementById('dbLoading');
+            if (dbLoading) dbLoading.innerHTML = `<p style="color:#dc3545;">⚠️ Lỗi tải dữ liệu: ${result.message || 'Không xác định'}</p>`;
+            if (result.message && result.message.includes('Unauthorized')) {
+                setTimeout(() => window.location.href = BASE_URL + 'admin/auth/login', 1500);
+            }
         }
     } catch(e) {
         console.error("Dashboard error:", e);
+        const dbLoading = document.getElementById('dbLoading');
+        if (dbLoading) dbLoading.innerHTML = '<p style="color:#dc3545;">⚠️ Lỗi kết nối máy chủ. Vui lòng tải lại trang.</p>';
     }
 }
 
