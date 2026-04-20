@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- TRANG LIST ---
+    // LIST
     const tbody = document.getElementById('apiTableBody');
     if (tbody) {
         loadAds();
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- TRANG ADD ---
+    // ADD 
     const addForm = document.getElementById('addForm');
     if (addForm) {
         addForm.addEventListener('submit', (e) => {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- TRANG EDIT ---
+    // EDIT 
     const editForm = document.getElementById('editForm');
     if (editForm) {
         if (typeof adId !== 'undefined' && adId > 0) {
@@ -70,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// ---------------- LIST LOGIC ----------------
 async function loadAds() {
     const searchInput = document.getElementById('searchInput');
     const search = searchInput ? searchInput.value.trim() : '';
@@ -180,7 +179,6 @@ function showMsg(str, type = 'success') {
 
 function escapeHtml(unsafe) { return (unsafe||'').toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 
-// ---------------- ADD/EDIT LOGIC ----------------
 async function submitAdd() {
     const formParams = new FormData();
     formParams.append('title', document.getElementById('title').value);
@@ -188,7 +186,6 @@ async function submitAdd() {
     formParams.append('position', document.getElementById('position').value);
     formParams.append('status', document.getElementById('status').value);
 
-    // add logic expected 'media_file' 
     const fileInput = document.getElementById('media_file');
     if (fileInput && fileInput.files.length > 0) {
         formParams.append('media_file', fileInput.files[0]);
@@ -244,7 +241,6 @@ async function submitEdit() {
     formParams.append('position', document.getElementById('position').value);
     formParams.append('status', document.getElementById('status').value);
 
-    // edit logic used id 'image_file' but sent 'image_file' as post param in update. We will send it as 'media_file' corresponding to store or keep it image_file as it was in edit.php? Wait, the old edit.php sent formParams.append('image_file', fileInput.files[0]). I will stick to 'image_file' to not confuse the controller.
     const fileInput = document.getElementById('image_file');
     if (fileInput && fileInput.files.length > 0) {
         formParams.append('image_file', fileInput.files[0]);

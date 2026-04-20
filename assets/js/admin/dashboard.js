@@ -65,7 +65,6 @@ async function loadDashboard() {
             const dbUI = document.getElementById('dashboardUI');
             if (dbUI) dbUI.style.display = 'block';
         } else {
-            // Lỗi API (ví dụ: chưa đăng nhập)
             const dbLoading = document.getElementById('dbLoading');
             if (dbLoading) dbLoading.innerHTML = `<p style="color:#dc3545;">⚠️ Lỗi tải dữ liệu: ${result.message || 'Không xác định'}</p>`;
             if (result.message && result.message.includes('Unauthorized')) {

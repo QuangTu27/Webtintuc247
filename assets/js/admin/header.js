@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Toggle user menu dropdown
     const userInfoToggle = document.getElementById('userInfoToggle');
     if (userInfoToggle) {
         userInfoToggle.addEventListener('click', toggleUserMenu);
     }
     
-    // Close dropdown when clicking outside
     document.addEventListener('click', function(e) {
         const dropdown = document.querySelector('.user-dropdown');
         if (dropdown && !dropdown.contains(e.target)) {
@@ -15,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Confirm logout
     const logoutLink = document.getElementById('logoutLink');
     if (logoutLink) {
         logoutLink.addEventListener('click', function(e) {

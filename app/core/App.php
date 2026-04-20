@@ -37,14 +37,12 @@ class App
             }
         }
 
-        // Tìm đường dẫn thư mục controller
         if (str_starts_with($this->namespace, 'api')) {
             $controllerDir = APPROOT . '/' . $this->namespace . '/';
         } else {
             $controllerDir = APPROOT . '/controllers/' . $this->namespace . '/';
         }
 
-        // Tìm controller file
         if (str_starts_with($this->namespace, 'api')) {
             $controllerName = isset($url[0]) ? ucfirst($url[0]) : $this->controller;
         } else {

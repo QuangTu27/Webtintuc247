@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const apiTableBody = document.getElementById('apiTableBody');
     if (apiTableBody) {
-        // We are on list.php
         catsRendered = false;
         loadList();
 
@@ -32,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const apiCommentsBody = document.getElementById('apiCommentsBody');
     if (apiCommentsBody) {
-        // We are on detail.php
         if (typeof newsId !== 'undefined' && newsId > 0) {
             loadComments();
         }
@@ -48,7 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// ---------------- LIST LOGIC ----------------
 let catsRendered = false;
 
 async function loadList() {
@@ -133,9 +130,6 @@ async function loadList() {
         tbody.innerHTML = '<tr><td colspan="6">Lỗi kết nối API Server</td></tr>';
     }
 }
-
-
-// ---------------- DETAIL LOGIC ----------------
 
 async function loadComments() {
     const tbody = document.getElementById('apiCommentsBody');

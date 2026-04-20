@@ -30,10 +30,8 @@ function showNotification(text, type = 'success') {
     }, 3000);
 }
 
-// GẮN SỰ KIỆN KHI TRANG VỪA LOAD XONG
 document.addEventListener('DOMContentLoaded', () => {
     
-    // Đọc thanh URL xem có thông báo thêm/sửa không
     const urlParams = new URLSearchParams(window.location.search);
     const msg = urlParams.get('msg'); 
 
@@ -87,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- (ADD/EDIT FORM) Các sự kiện cho Form ---
     const categoryForm = document.getElementById('categoryForm');
     if (categoryForm) {
         initCategoryForm();
@@ -98,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// CÁC HÀM XỬ LÝ API 
 async function loadCategories() {
     const filterSelect = document.getElementById('filterId');
     const filterId = filterSelect ? filterSelect.value : 0;
@@ -237,7 +233,6 @@ function updateDeleteBtn() {
 }
 
 
-// --- CÁC HÀM CỦA TRANG THÊM/SỬA FORM ---
 async function initCategoryForm() {
     try {
         const resForm = await fetch(BASE_URL + 'api/categories/formdata');

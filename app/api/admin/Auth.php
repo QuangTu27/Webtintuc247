@@ -1,7 +1,7 @@
 <?php
 class Auth extends ApiController
 {
-    // POST /api/auth (store) → login
+    // POST /api/auth 
     public function store()
     {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -51,4 +51,3 @@ class Auth extends ApiController
         $this->json('success', ['redirect' => URLROOT . 'admin/auth/login']);
     }
 }
-

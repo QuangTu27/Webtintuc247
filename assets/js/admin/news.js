@@ -4,7 +4,6 @@ let currentUserIdAuth = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- TRANG LIST ---
     const apiTableBody = document.getElementById('apiTableBody');
     if (apiTableBody) {
         loadNews();
@@ -43,15 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-
-    // --- TRANG ADD ---
     const addNewsForm = document.getElementById('addNewsForm');
     if (addNewsForm) {
         initAddForm();
         addNewsForm.addEventListener('submit', submitAddForm);
     }
 
-    // --- TRANG EDIT ---
     const editNewsForm = document.getElementById('editNewsForm');
     if (editNewsForm) {
         if (typeof newsId === 'undefined' || !newsId) {
@@ -65,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ---------------- LIST LOGIC ----------------
 async function loadNews() {
     const filterId = document.getElementById('filterCategory') ? document.getElementById('filterCategory').value : 0;
     const tbody = document.getElementById('apiTableBody');
@@ -168,7 +163,6 @@ function renderTable(data, auth) {
     tbody.innerHTML = html;
 }
 
-// Chú ý: Vì HTML gọi qua onclick truyền hàm toàn cục này nên ta để nó ở scope public
 window.updateStatus = async function(id, action) {
     if (!confirm('Xác nhận đổi trạng thái?')) return;
     const body = new FormData();
@@ -230,7 +224,6 @@ function showMsg(msg) {
 }
 
 
-// ---------------- ADD LOGIC ----------------
 async function initAddForm() {
     if (typeof CKEDITOR !== 'undefined') {
         CKEDITOR.replace('editor', { height: 400, versionCheck: false, allowedContent: true });
@@ -318,7 +311,6 @@ async function submitAddForm(e) {
 }
 
 
-// ---------------- EDIT LOGIC ----------------
 async function initEditForm() {
     try {
         const resCat = await fetch(BASE_URL + 'api/news/formdata');
